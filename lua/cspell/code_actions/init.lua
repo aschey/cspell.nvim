@@ -55,6 +55,9 @@ return make_builtin({
         ---@param params GeneratorParams
         ---@return table<number, CodeAction>
         fn = function(params)
+            if vim.tbl_isempty(params.lsp_params.context.diagnostics) then
+                return {}
+            end
             params.cwd = params.cwd or u.get_root()
 
             ---@type CSpellSourceConfig
